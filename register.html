@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Student Registration Form</title>
+  <script>
+    function updateFeeDetails() {
+      const schoolType = document.getElementById("schoolType").value;
+      let baseFee = 0;
+
+      switch (schoolType) {
+        case "Govt": baseFee = 1000; break;
+        case "Pvt": baseFee = 3000; break;
+        case "Mutt": baseFee = 2000; break;
+        case "Trust": baseFee = 2500; break;
+        case "Devasthanams": baseFee = 2200; break;
+        default: baseFee = 0;
+      }
+
+      const gst = baseFee * 0.18;
+      const txn = 20;
+      const total = baseFee + gst + txn;
+
+      document.getElementById("baseFee").innerText = `Base Fee: ₹${baseFee}`;
+      document.getElementById("gst").innerText = `GST: ₹${gst}`;
+      document.getElementById("txn").innerText = `Transaction Fee: ₹${txn}`;
+      document.getElementById("totalFee").innerText = `Total: ₹${total}`;
+    }
+
+    function toggleOther(id, inputId) {
+      const dropdown = document.getElementById(id);
+      const input = document.getElementById(inputId);
+      input.style.display = dropdown.value === "Other" ? "block" : "none";
+    }
+
+    function showExecutiveFields(value) {
+      document.getElementById("executiveFields").style.display = value === "Marketing Executive" ? "grid" : "none";
+    }
+
+    function showOtp() {
+      document.getElementById("otpSection").style.display = "block";
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-6 bg-gray-50 text-sm">
+
+  <h1 class="text-2xl font-bold text-blue-800 mb-4">🎓 Student Registration Form</h1>
+
+  <!-- Student Information -->
+  <div class="grid grid-cols-2 gap-4">
+    <div class="flex gap-2">
+      <input class="border border-blue-400 p-2 rounded w-full" placeholder="Student Name">
+      <select class="border border-blue-400 p-2 rounded w-1/2">
+        <option>Blood Group</option><option>A+</option><option>A-</option><option>B+</option>
+        <option>B-</option><option>O+</option><option>O-</option><option>AB+</option><option>AB-</option>
+      </select>
+    </div>
+
+    <select class="border border-blue-400 p-2 rounded">
+      <option>Gender</option><option>Male</option><option>Female</option><option>Other</option>
+    </select>
+
+    <select class="border border-blue-400 p-2 rounded">
+      <option>Class</option>
+      <option>LKG</option><option>UKG</option>
+      <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+      <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+      <option>11</option><option>12</option>
+    </select>
+
+    <div>
+      <select id="board" onchange="toggleOther('board','boardOther')" class="border border-blue-400 p-2 rounded w-full mb-2">
+        <option>Board Type</option><option>State</option><option>Central</option><option>International</option><option>Other</option>
+      </select>
+      <input id="boardOther" style="display:none" placeholder="Enter Board Name" class="border p-2 rounded w-full" />
+    </div>
+
+    <select id="schoolType" onchange="updateFeeDetails()" class="border border-blue-400 p-2 rounded">
+      <option>School Type</option>
+      <option value="Govt">Govt</option>
+      <option value="Pvt">Pvt</option>
+      <option value="Mutt">Mutt</option>
+      <option value="Trust">Trust</option>
+      <option value="Devasthanams">Devasthanams</option>
+    </select>
+
+    <select class="border border-blue-400 p-2 rounded">
+      <option>Group</option><option>Science</option><option>Commerce</option>
+    </select>
+  </div>
+
+  <!-- Parent Information -->
+  <h2 class="mt-6 text-lg font-semibold text-green-700">👨‍👩‍👧 Parent Information</h2>
+  <div class="grid grid-cols-2 gap-4 mt-2">
+    <div class="flex gap-2">
+      <input class="border border-green-300 p-2 rounded w-full" placeholder="Father Name">
+      <select class="border border-green-300 p-2 rounded w-1/2">
+        <option>Blood Group</option><option>A+</option><option>A-</option><option>B+</option>
+        <option>B-</option><option>O+</option><option>O-</option><option>AB+</option><option>AB-</option>
+      </select>
+    </div>
+    <div class="flex gap-2">
+      <input class="border border-green-300 p-2 rounded w-full" placeholder="Mother Name">
+      <select class="border border-green-300 p-2 rounded w-1/2">
+        <option>Blood Group</option><option>A+</option><option>A-</option><option>B+</option>
+        <option>B-</option><option>O+</option><option>O-</option><option>AB+</option><option>AB-</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Location -->
+  <h2 class="mt-6 text-lg font-semibold text-purple-700">🌍 Location Information</h2>
+  <div class="grid grid-cols-2 gap-4 mt-2">
+    <div>
+      <select id="country" onchange="toggleOther('country','countryOther')" class="border border-purple-300 p-2 rounded w-full">
+        <option>Country</option><option>India</option><option>Other</option>
+      </select>
+      <input id="countryOther" style="display:none" placeholder="Enter Country" class="border p-2 rounded w-full mt-1" />
+    </div>
+
+    <div>
+      <select id="state" onchange="toggleOther('state','stateOther')" class="border border-purple-300 p-2 rounded w-full">
+        <option>State</option><option>Tamil Nadu</option><option>Karnataka</option><option>Other</option>
+      </select>
+      <input id="stateOther" style="display:none" placeholder="Enter State" class="border p-2 rounded w-full mt-1" />
+    </div>
+
+    <div>
+      <select id="district" onchange="toggleOther('district','districtOther')" class="border border-purple-300 p-2 rounded w-full">
+        <option>District</option><option>Nilgiris</option><option>Other</option>
+      </select>
+      <input id="districtOther" style="display:none" placeholder="Enter District" class="border p-2 rounded w-full mt-1" />
+    </div>
+
+    <div>
+      <select id="taluk" onchange="toggleOther('taluk','talukOther')" class="border border-purple-300 p-2 rounded w-full">
+        <option>Taluk</option><option>Kotagiri</option><option>Other</option>
+      </select>
+      <input id="talukOther" style="display:none" placeholder="Enter Taluk" class="border p-2 rounded w-full mt-1" />
+    </div>
+
+    <div>
+      <select id="village" onchange="toggleOther('village','villageOther')" class="border border-purple-300 p-2 rounded w-full">
+        <option>Village</option><option>Ooty</option><option>Other</option>
+      </select>
+      <input id="villageOther" style="display:none" placeholder="Enter Village" class="border p-2 rounded w-full mt-1" />
+    </div>
+  </div>
+
+  <!-- Fee Section -->
+  <h2 class="mt-6 text-lg font-semibold text-yellow-700">💰 Fee Details</h2>
+  <div class="bg-yellow-50 p-4 rounded shadow border border-yellow-300">
+    <div id="baseFee">Base Fee: ₹0</div>
+    <div id="gst">GST: ₹0</div>
+    <div id="txn">Transaction Fee: ₹0</div>
+    <hr class="my-2">
+    <div id="totalFee" class="text-lg font-bold">Total: ₹0</div>
+  </div>
+
+  <!-- Referral -->
+  <h2 class="mt-6 text-lg font-semibold text-indigo-700">📣 How did you hear about us?</h2>
+  <div class="mt-2">
+    <select onchange="showExecutiveFields(this.value)" class="border border-indigo-300 p-2 rounded w-full">
+      <option>Select Source</option><option>Search Engine</option><option>Social Media</option><option>Friends</option><option>Newspaper</option><option>Marketing Executive</option>
+    </select>
+
+    <div id="executiveFields" class="grid grid-cols-2 gap-4 mt-4 hidden">
+      <input class="border p-2 rounded" placeholder="Executive Name">
+      <input class="border p-2 rounded" placeholder="Mobile Number">
+      <input class="border p-2 rounded" placeholder="Place">
+      <input class="border p-2 rounded" placeholder="Student Name">
+      <input class="border p-2 rounded" placeholder="School Name">
+    </div>
+  </div>
+
+  <!-- OTP & Submit -->
+  <div class="text-right mt-6">
+    <button onclick="showOtp()" class="bg-blue-600 text-white px-6 py-2 rounded shadow hover:bg-blue-700">Proceed to Payment</button>
+  </div>
+
+  <div id="otpSection" class="mt-4 hidden">
+    <input class="border p-2 rounded" placeholder="Enter OTP">
+    <button class="bg-green-600 text-white px-4 py-2 rounded ml-2">Submit Registration</button>
+  </div>
+
+</body>
+</html>
